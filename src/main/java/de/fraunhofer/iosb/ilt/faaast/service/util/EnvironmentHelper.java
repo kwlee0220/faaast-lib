@@ -24,6 +24,8 @@ import java.util.stream.Collectors;
 import org.eclipse.digitaltwin.aas4j.v3.model.Environment;
 import org.eclipse.digitaltwin.aas4j.v3.model.Referable;
 import org.eclipse.digitaltwin.aas4j.v3.model.Reference;
+import org.eclipse.digitaltwin.aas4j.v3.model.ReferenceTypes;
+import org.w3.x2000.x09.xmldsig.ReferenceType;
 
 
 /**
@@ -56,6 +58,7 @@ public class EnvironmentHelper {
         Ensure.require(!reference.getKeys().isEmpty(), "reference must contain at least one key");
         Ensure.requireNonNull(environment, "environment must be non-null");
         Ensure.requireNonNull(returnType, "type must be non-null");
+        
         Referable result = ReferenceCollector.collect(environment).entrySet().stream()
                 .filter(x -> ReferenceHelper.equals(reference, x.getKey()))
                 .map(Map.Entry::getValue)

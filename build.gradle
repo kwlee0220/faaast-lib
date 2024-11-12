@@ -4,51 +4,27 @@ plugins {
 }
 
 group = 'de.fraunhofer.iosb.ilt.faaast'
+version = '1.0.0-0.9.1'
 
-ext {
-	guava_version = '33.1.0-jre'
-	
-	jackson_version = '2.17.2'
-	jsonpath_version = '2.9.0'
-	jakarta_xml_version = '4.0.2'
-	json_patch_version = '1.13'
-	bouncycastle_version = '1.77'
-	jsonassert_version = '1.5.1'
-	jena_version = '5.0.0'
-	rgxgen_version = '2.0'
-	fileupload_version = '1.5'
-	classgraph_version = '4.8.168'
-	jakarta_servlet_version = '6.0.0'
-	commons_lang3_version = '3.14.0'
-	httpclient5_version = '5.3.1'
-	jetty_version = '11.0.20'
-	parsson_version = '1.1.5'
-	minidev_version = '2.5.1'
-	wiremock_version = '2.35.2'
-	jakarta_xml_bind_api_version = '4.0.2'
-	awaitility_version = '4.2.1'
-	moquette_version = '0.17'
-	netty_version = '4.1.107.Final'
-	paho_version = '1.2.5'
-	httpclient5_version = '5.3.1'
-	jetty_version = '11.0.20'
-	commons_io_version = '2.15.1'
-	logback_version = '1.5.3'
-	picocli_version = '4.7.5'
-	systemstubs_version = '2.1.6'
-	
-	aas4j_version = '1.0.2'
-	
-	junit_version = '4.13.2'
-	mockito_version = '3.12.4'
-	slf4j_version = '2.0.12'
+java {
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 }
 
+[compileJava,compileTestJava]*.options*.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+repositories {
+	mavenCentral()
+}
 dependencies {
+	
 	implementation "com.fasterxml.jackson.core:jackson-annotations:${jackson_version}"
 	implementation "com.fasterxml.jackson.core:jackson-core:${jackson_version}"
 	implementation "com.fasterxml.jackson.core:jackson-databind:${jackson_version}"
-	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jackson_version}'
+	implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jackson_version}"
 	implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jakarta_xml_version}"
 	implementation ("com.github.java-json-tools:json-patch:${json_patch_version}") {
 		exclude group: "com.fasterxml.jackson.core", module: "jackson-databind"
@@ -56,21 +32,18 @@ dependencies {
 		exclude group: "com.fasterxml.jackson.core", module: "jackson-annotations"
 	}
 	
+	implementation "com.github.curious-odd-man:rgxgen:${rgxgen_version}"
 	implementation "org.skyscreamer:jsonassert:${jsonassert_version}"
-	implementation "org.bouncycastle:bcprov-jdk18on:${bouncycastle_version}"
-	implementation "org.bouncycastle:bcpkix-jdk18on:${bouncycastle_version}"
-	implementation "org.apache.jena:jena-arq:${jena_version}"
-
 	implementation ("com.jayway.jsonpath:json-path:${jsonpath_version}") {
 		exclude group: "net.minidev", module: "json-smart"
 	}
-	implementation "io.github.classgraph:classgraph:${classgraph_version}"
-	implementation "net.minidev:json-smart:${minidev_version}"
-	implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jakarta_xml_bind_api_version}"
-	implementation "org.apache.commons:commons-lang3:${commons_lang3_version}"
-	implementation "com.github.curious-odd-man:rgxgen:${rgxgen_version}"
+	implementation "org.apache.jena:jena-arq:${jena_version}"
+	implementation "org.bouncycastle:bcprov-jdk18on:${bouncycastle_version}"
+	implementation "org.bouncycastle:bcpkix-jdk18on:${bouncycastle_version}"
 	implementation "commons-fileupload:commons-fileupload:${fileupload_version}"
-
+	
+	implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jakarta_xml_bind_api_version}"
+	implementation "io.netty:netty-codec-mqtt:${netty_version}"
 	implementation ("io.moquette:moquette-broker:${moquette_version}") {
 		exclude group: "org.slf4j", module: "slf4j-log4j12"
 		exclude group: "com.h2database", module: "h2-mvstore"
@@ -78,14 +51,7 @@ dependencies {
 		exclude group: "io.netty"
 		exclude group: "com.librato.metrics", module: "librato-java"
 	}
-	implementation "io.netty:netty-buffer:${netty_version}"
-	implementation "io.netty:netty-codec:${netty_version}"
-	implementation "io.netty:netty-codec-http:${netty_version}"
-	implementation "io.netty:netty-codec-mqtt:${netty_version}"
-	implementation "io.netty:netty-common:${netty_version}"
-	implementation "org.apache.commons:commons-lang3:${commons_lang3_version}"
 	implementation "org.eclipse.paho:org.eclipse.paho.client.mqttv3:${paho_version}"
-	implementation "commons-io:commons-io:${commons_io_version}"
 
 	implementation "org.eclipse.jetty:jetty-server:${jetty_version}"
 	implementation "org.eclipse.jetty:jetty-servlets:${jetty_version}"
@@ -93,7 +59,43 @@ dependencies {
 	implementation ("org.eclipse.digitaltwin.aas4j:aas4j-model:${aas4j_version}") {
 		exclude group: "com.mycila", module: "license-maven-plugin"
 	}
-	
 	implementation "org.eclipse.digitaltwin.aas4j:aas4j-dataformat-aasx:${aas4j_version}"
 	implementation "org.eclipse.digitaltwin.aas4j:aas4j-dataformat-json:${aas4j_version}"
+}
+
+eclipse {
+	classpath {
+		file {
+			withXml {
+				def node = it.asNode()
+				node.appendNode('classpathentry', [kind: 'output', path: 'build/classes'])
+			}
+			
+			whenMerged { cp ->
+				Map entryByPath = cp.entries.groupBy { entry -> entry.path }
+				entryByPath.each { key, values ->
+					if ( values.size() > 1 ) {
+						def entry = values.first()
+						if ( entry.kind == 'src' ) {
+							entry.includes = []
+							entry.excludes = []
+						}
+						int index = cp.entries.indexOf entry
+						cp.entries.removeAll values
+						cp.entries.add index, entry
+					}
+				}
+				cp.entries.each { entry ->
+					if ( entry.kind == 'src' && entry.hasProperty('output') ) {
+						if ( entry.path.contains('/test/') ) {
+							entry.output = 'build/test_classes'
+						}
+						else {
+							entry.output = 'build/classes'
+						}
+					}
+				}
+			}
+		}
+	}
 }

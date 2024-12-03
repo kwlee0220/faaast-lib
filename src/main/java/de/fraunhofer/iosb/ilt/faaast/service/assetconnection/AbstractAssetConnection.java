@@ -38,7 +38,14 @@ import org.eclipse.digitaltwin.aas4j.v3.model.Reference;
  * @param <SC> type of subscription config
  * @param <S> type of subscription
  */
-public abstract class AbstractAssetConnection<T extends AssetConnection<C, VC, V, OC, O, SC, S>, C extends AssetConnectionConfig<T, VC, OC, SC>, VC extends AssetValueProviderConfig, V extends AssetValueProvider, OC extends AssetOperationProviderConfig, O extends AssetOperationProvider, SC extends AssetSubscriptionProviderConfig, S extends AssetSubscriptionProvider>
+public abstract class AbstractAssetConnection<T extends AssetConnection<C, VC, V, OC, O, SC, S>,
+												C extends AssetConnectionConfig<T, VC, OC, SC>,
+												VC extends AssetValueProviderConfig,
+												V extends AssetValueProvider,
+												OC extends AssetOperationProviderConfig,
+												O extends AssetOperationProvider,
+												SC extends AssetSubscriptionProviderConfig,
+												S extends AssetSubscriptionProvider>
         implements AssetConnection<C, VC, V, OC, O, SC, S> {
 
     protected volatile boolean connected;

@@ -26,7 +26,9 @@ import de.fraunhofer.iosb.ilt.faaast.service.typing.TypeInfo;
  *
  * @param <T> type of matching configuration
  */
-public abstract class AbstractMultiFormatReadProvider<T extends MultiFormatReadProviderConfig> extends AbstractMultiFormatProvider<T> implements MultiFormatReadProvider {
+public abstract class AbstractMultiFormatReadProvider<T extends MultiFormatReadProviderConfig>
+																				extends AbstractMultiFormatProvider<T>
+																				implements MultiFormatReadProvider {
 
     protected AbstractMultiFormatReadProvider(T config) {
         super(config);

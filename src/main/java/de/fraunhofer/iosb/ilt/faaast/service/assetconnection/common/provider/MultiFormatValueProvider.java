@@ -23,7 +23,9 @@ import de.fraunhofer.iosb.ilt.faaast.service.assetconnection.common.provider.con
  *
  * @param <T> concrete type of matching configuration
  */
-public abstract class MultiFormatValueProvider<T extends MultiFormatValueProviderConfig> extends AbstractMultiFormatReadWriteProvider<T> implements AssetValueProvider {
+public abstract class MultiFormatValueProvider<T extends MultiFormatValueProviderConfig>
+																		extends AbstractMultiFormatReadWriteProvider<T>
+																		implements AssetValueProvider {
 
     protected MultiFormatValueProvider(T config) {
         super(config);

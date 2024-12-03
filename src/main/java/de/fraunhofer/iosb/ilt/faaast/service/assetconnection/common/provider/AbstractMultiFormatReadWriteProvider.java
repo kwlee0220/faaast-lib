@@ -25,8 +25,9 @@ import de.fraunhofer.iosb.ilt.faaast.service.model.value.DataElementValue;
  *
  * @param <T> type of matching configuration
  */
-public abstract class AbstractMultiFormatReadWriteProvider<T extends MultiFormatReadWriteProviderConfig> extends AbstractMultiFormatReadProvider<T>
-        implements MultiFormatReadWriteProvider {
+public abstract class AbstractMultiFormatReadWriteProvider<T extends MultiFormatReadWriteProviderConfig>
+																		extends AbstractMultiFormatReadProvider<T>
+        																implements MultiFormatReadWriteProvider {
 
     protected AbstractMultiFormatReadWriteProvider(T config) {
         super(config);

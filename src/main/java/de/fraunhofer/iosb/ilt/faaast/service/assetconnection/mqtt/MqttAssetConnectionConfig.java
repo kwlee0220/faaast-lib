@@ -14,6 +14,9 @@
  */
 package de.fraunhofer.iosb.ilt.faaast.service.assetconnection.mqtt;
 
+import java.util.Objects;
+import java.util.UUID;
+
 import de.fraunhofer.iosb.ilt.faaast.service.assetconnection.AssetConnectionConfig;
 import de.fraunhofer.iosb.ilt.faaast.service.assetconnection.mqtt.provider.MqttOperationProvider;
 import de.fraunhofer.iosb.ilt.faaast.service.assetconnection.mqtt.provider.MqttSubscriptionProvider;
@@ -21,14 +24,15 @@ import de.fraunhofer.iosb.ilt.faaast.service.assetconnection.mqtt.provider.MqttV
 import de.fraunhofer.iosb.ilt.faaast.service.assetconnection.mqtt.provider.config.MqttOperationProviderConfig;
 import de.fraunhofer.iosb.ilt.faaast.service.assetconnection.mqtt.provider.config.MqttSubscriptionProviderConfig;
 import de.fraunhofer.iosb.ilt.faaast.service.assetconnection.mqtt.provider.config.MqttValueProviderConfig;
-import java.util.Objects;
-import java.util.UUID;
 
 
 /**
  * Config file for {@link MqttAssetConnection}.
  */
-public class MqttAssetConnectionConfig extends AssetConnectionConfig<MqttAssetConnection, MqttValueProviderConfig, MqttOperationProviderConfig, MqttSubscriptionProviderConfig> {
+public class MqttAssetConnectionConfig extends AssetConnectionConfig<MqttAssetConnection,
+																		MqttValueProviderConfig,
+																		MqttOperationProviderConfig,
+																		MqttSubscriptionProviderConfig> {
 
     private String serverUri;
     private String clientId;
@@ -110,7 +114,8 @@ public class MqttAssetConnectionConfig extends AssetConnectionConfig<MqttAssetCo
         return new Builder();
     }
 
-    public abstract static class AbstractBuilder<T extends MqttAssetConnectionConfig, B extends AbstractBuilder<T, B>>
+    public abstract static class AbstractBuilder<T extends MqttAssetConnectionConfig,
+    												B extends AbstractBuilder<T, B>>
             extends
             AssetConnectionConfig.AbstractBuilder<MqttAssetConnectionConfig, MqttValueProviderConfig, MqttValueProvider, MqttOperationProviderConfig, MqttOperationProvider, MqttSubscriptionProviderConfig, MqttSubscriptionProvider, MqttAssetConnection, B> {
 

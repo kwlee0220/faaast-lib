@@ -17,6 +17,7 @@ package de.fraunhofer.iosb.ilt.faaast.service.assetconnection.common.provider.co
 /**
  * Configuration for reading and writing values using multiple data formats.
  */
-public interface MultiFormatReadWriteProviderConfig extends MultiFormatReadProviderConfig, MultiFormatWriteProviderConfig {
+public interface MultiFormatReadWriteProviderConfig extends MultiFormatReadProviderConfig,
+																MultiFormatWriteProviderConfig {
 
 }

@@ -230,6 +230,10 @@ public class Service implements ServiceContext {
     public AssetConnectionManager getAssetConnectionManager() {
         return assetConnectionManager;
     }
+    
+	public Persistence getPersistence() {
+		return persistence;
+	}
 
 
     /**

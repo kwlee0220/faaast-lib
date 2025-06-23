@@ -44,6 +44,7 @@ public class GetSubmodelElementByPathRequestMapper extends AbstractSubmodelInter
 
     @Override
     public GetSubmodelElementByPathRequest doParse(HttpRequest httpRequest, Map<String, String> urlParameters, OutputModifier outputModifier) throws InvalidRequestException {
+    	// TODO: kwlee GetSubmodelElementValueByPath 동작 수행
         return GetSubmodelElementByPathRequest.builder()
                 .path(EncodingHelper.urlDecode(urlParameters.get(SUBMODEL_ELEMENT_PATH)))
                 .build();

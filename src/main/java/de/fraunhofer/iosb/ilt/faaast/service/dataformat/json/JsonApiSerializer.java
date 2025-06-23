@@ -18,6 +18,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
 import de.fraunhofer.iosb.ilt.faaast.service.dataformat.ApiSerializer;
 import de.fraunhofer.iosb.ilt.faaast.service.dataformat.SerializationException;
 import de.fraunhofer.iosb.ilt.faaast.service.dataformat.json.mixins.AbstractRequestWithModifierMixin;
@@ -87,6 +89,7 @@ public class JsonApiSerializer implements ApiSerializer {
 
     @Override
     public String write(Object obj, OutputModifier modifier) throws SerializationException {
+    	// TODO: OutputModifier에 따라 serialization 방식이 달라지는 코드 위치.
         Ensure.requireNonNull(modifier, "modifier must be non-null");
         switch (modifier.getContent()) {
             case VALUE:

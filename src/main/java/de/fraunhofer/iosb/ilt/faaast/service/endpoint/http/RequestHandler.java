@@ -124,6 +124,7 @@ public class RequestHandler extends AbstractHandler {
                                 x -> request.getHeader(x))))
                 .build();
         try {
+        	// TODO: kwlee 모든 HTTP 요청이 도착하는 위치
             executeAndSend(response, requestMappingManager.map(httpRequest));
         }
         catch (MethodNotAllowedException e) {

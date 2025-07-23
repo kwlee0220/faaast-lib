@@ -49,6 +49,7 @@ public class InvokeOperationAsyncRequestMapper extends AbstractSubmodelInterface
     public InvokeOperationAsyncRequest doParse(HttpRequest httpRequest, Map<String, String> urlParameters, OutputModifier outputModifier) throws InvalidRequestException {
         InvokeOperationAsyncRequest result;
 
+        // TODO: kwlee InvokeOperationAsync 동작 시작 위치.
         SubmodelElementIdentifier identifier = SubmodelElementIdentifier.builder()
                 .submodelId(EncodingHelper.base64UrlDecode(urlParameters.get(SUBMODEL_ID)))
                 .idShortPath(IdShortPath.parse(EncodingHelper.urlDecode(urlParameters.get(SUBMODEL_ELEMENT_PATH))))

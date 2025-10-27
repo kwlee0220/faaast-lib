@@ -68,6 +68,7 @@ public interface ServiceContext {
      */
     public MessageBus getMessageBus();
 
+    // TODO: add by kwlee
     public FileStorage getFileStorage();
 
     /**

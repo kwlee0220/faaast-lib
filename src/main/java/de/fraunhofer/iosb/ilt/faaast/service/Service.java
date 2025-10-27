@@ -231,9 +231,9 @@ public class Service implements ServiceContext {
         return assetConnectionManager;
     }
     
-	public Persistence getPersistence() {
-		return persistence;
-	}
+//	public Persistence getPersistence() {
+//		return persistence;
+//	}
 
 
     /**
